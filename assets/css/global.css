@@ -1,0 +1,74 @@
+:root {
+    --color-dark: rgb(13, 24, 33);
+    --color-text: white;
+    --color-text-secondary: #818181;
+    --color-dark-lighter: rgb(14, 43, 63);
+    --color-dark-gradient: linear-gradient(to right, var(--color-dark), var(--color-dark-lighter));
+    --color-dark-hover: rgb(12, 22, 30);
+    --color-primary: #e01179;
+    --color-gray: #2F323A;
+}
+
+body {
+    color: var(--color-text) !important;
+    background-color: var(--color-dark) !important;
+    font-size: 13pt;
+    font-family: Poppins !important;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.bold {
+    font-weight: bold !important;
+}
+
+.btn-primary {
+    border: none !important;
+}
+
+.text-primary {
+    color: var(--color-primary) !important;
+}
+
+.bg-dark {
+    background-color: var(--color-dark) !important;
+}
+
+.bg-gray {
+    background-color: var(--color-gray) !important;
+}
+
+.rounded-lg {
+    border-radius: 2rem !important;
+}
+
+.text-secondary {
+    color: var(--color-text-secondary) !important;
+}
+
+span {
+    display: block;
+}
+
+a {
+    color: var(--color-primary) !important;
+    text-decoration: none !important;
+}
+
+.form-control{
+    background-color: #2F323A !important;
+    color: white !important;
+}
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #a4a6a8 !important;
+    opacity: 1; /* Firefox */
+}
+
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #a4a6a8 !important;
+}
+
+.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: #a4a6a8 !important;
+}
