@@ -4,9 +4,11 @@
   "description": "This is an app launcher developed with ElectronJS.",
   "main": "main.js",
   "scripts": {
-    "start": "electron ./main.js",
-    "electron": "electron ./main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron .",
+    "react-start": "react-scripts start",
+    "react-build": "react-scripts build",
+    "react-test": "react-scripts test",
+    "react-eject": "react-scripts eject"
   },
   "author": "",
   "license": "ISC",
