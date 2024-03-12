@@ -1,10 +1,11 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, Tray, Menu } = require('electron');
 const path = require('path');
 
 require('electron-reload')(__dirname);
 
 let win;
 let splash;
+let tray;
 
 function createSplashWindow() {
   splash = new BrowserWindow({
@@ -14,6 +15,7 @@ function createSplashWindow() {
     transparent: true,
     alwaysOnTop: true,
     resizable: false,
+    icon: path.join(__dirname, 'assets/img/icon.png'),
     webPreferences: {
       nodeIntegration: true
     }
@@ -32,6 +34,7 @@ function createMainWindow() {
     width: 1200,
     height: 800,
     show: false,
+    icon: path.join(__dirname, 'assets/img/icon.png'),
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -49,9 +52,33 @@ function createMainWindow() {
   win.on('closed', () => {
     win = null;
   });
+
+  win.on('close', (event) => {
+    if (!app.isQuitting) {
+      event.preventDefault();
+      win.hide();
+    }
+  });
 }
 
-app.on('ready', createSplashWindow);
+function createTray() {
+  tray = new Tray(path.join(__dirname, 'assets/img/icon.png'));
+
+  const contextMenu = Menu.buildFromTemplate([
+    { label: 'Open Chimera', click: () => win.show() },
+    { label: 'Exit Program', click: () => app.quit() }
+  ]);
+
+  tray.setToolTip('Chimera');
+  tray.setContextMenu(contextMenu);
+
+  tray.on('click', () => win.show());
+}
+
+app.on('ready', () => {
+  createSplashWindow();
+  createTray();
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -65,6 +92,9 @@ app.on('activate', () => {
   }
 });
 
+app.on('before-quit', () => {
+  app.isQuitting = true;
+});
 
 ipcMain.on('launch-exe-app', () => {
   var child = require('child_process').execFile;
