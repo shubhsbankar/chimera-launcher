@@ -36,7 +36,6 @@
     </div>
 
     <script>
-        // Function to launch the exe app
         function launchExeApp() {
             if (window.ipcRenderer) {
                 window.ipcRenderer.send('launch-exe-app');
@@ -45,7 +44,6 @@
             }
         }
 
-        // Add event listener to the button
         document.getElementById('dofus-run-button').addEventListener('click', function() {
             launchExeApp();
         });
