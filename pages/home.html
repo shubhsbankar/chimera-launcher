@@ -29,11 +29,27 @@
             <div class="card-body">
                 <h5 class="card-title text-white">dofus.exe</h5>
                 <p class="card-text text-secondary">Some quick example text to build on the card title and make.</p>
-                <button class="btn btn-primary text-white" onclick="runFile()">Run</button>
+                <button class="btn btn-primary text-white" id="dofus-run-button">Run</button>
             </div>
         </div>
 
     </div>
+
+    <script>
+        // Function to launch the exe app
+        function launchExeApp() {
+            if (window.ipcRenderer) {
+                window.ipcRenderer.send('launch-exe-app');
+            } else {
+                console.error('ipcRenderer is not available');
+            }
+        }
+
+        // Add event listener to the button
+        document.getElementById('dofus-run-button').addEventListener('click', function() {
+            launchExeApp();
+        });
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="module" src="../assets/js/main.js"></script>

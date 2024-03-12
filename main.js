@@ -1,19 +1,7 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 
 require('electron-reload')(__dirname);
-
-var child = require('child_process').execFile;
-var executablePath = "C:\\WINDOWS\\system32\\notepad.exe";
-
-child(executablePath, function(err, data) {
-    if(err){
-       console.error(err);
-       return;
-    }
- 
-    console.log(data.toString());
-});
 
 let win;
 let splash;
@@ -45,7 +33,9 @@ function createMainWindow() {
     height: 800,
     show: false,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: false,
+      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js')
     }
   });
 
@@ -73,4 +63,19 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createSplashWindow();
   }
+});
+
+
+ipcMain.on('launch-exe-app', () => {
+  var child = require('child_process').execFile;
+  var executablePath = "C:\\WINDOWS\\system32\\notepad.exe";
+
+  child(executablePath, function (err, data) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+    console.log(data.toString());
+  });
 });
