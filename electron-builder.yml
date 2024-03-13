@@ -1,0 +1,5 @@
+appId: com.launcher.chimera
+publish:
+  provider: github
+  owner: NENAD-BLAGOVCANIN
+  repo: chimera-launcher

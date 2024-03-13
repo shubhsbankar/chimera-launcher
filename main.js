@@ -1,7 +1,8 @@
 const { app, BrowserWindow, ipcMain, Tray, Menu } = require('electron');
+const { autoUpdater } = require('electron-updater');
 const path = require('path');
 
-require('electron-reload')(__dirname);
+// require('electron-reload')(__dirname);
 
 let win;
 let splash;
@@ -59,6 +60,9 @@ function createMainWindow() {
       win.hide();
     }
   });
+
+  autoUpdater.checkForUpdatesAndNotify();
+
 }
 
 function createTray() {
@@ -108,4 +112,8 @@ ipcMain.on('launch-exe-app', () => {
 
     console.log(data.toString());
   });
+});
+
+autoUpdater.on('update-downloaded', () => {
+  autoUpdater.quitAndInstall();
 });

@@ -6,16 +6,20 @@
   "scripts": {
     "start": "electron ./main.js",
     "electron": "electron ./main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "electron-packager ."
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "electron": "^29.1.0",
+    "electron-builder": "^24.13.3",
     "electron-reload": "^2.0.0-alpha.1",
     "electron-reloader": "^1.2.3"
   },
   "dependencies": {
-    "discord-rpc-electron": "^4.0.1"
+    "discord-rpc-electron": "^4.0.1",
+    "electron-packager": "^17.1.2",
+    "electron-updater": "^6.1.8"
   }
 }
