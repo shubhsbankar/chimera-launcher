@@ -82,6 +82,8 @@ function createTray() {
 app.on('ready', () => {
   createSplashWindow();
   createTray();
+
+  autoUpdater.checkForUpdatesAndNotify();
 });
 
 app.on('window-all-closed', () => {
