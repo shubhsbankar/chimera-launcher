@@ -116,6 +116,6 @@ ipcMain.on('launch-exe-app', () => {
   });
 });
 
-autoUpdater.on('update-downloaded', () => {
-  autoUpdater.quitAndInstall();
+autoUpdater.on('update-available', () => {
+  autoUpdater.downloadUpdate();
 });
