@@ -7,9 +7,24 @@
     "start": "electron ./main.js",
     "electron": "electron ./main.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "electron-packager ."
+    "build": "electron-packager .",
+    "dist": "electron-builder"
   },
-  "author": "",
+  "build": {
+    "appId": "com.chimera.launcher",
+    "win": {
+      "target": "nsis"
+    },
+    "directories": {
+      "output": "dist"
+    }
+  },
+  "repository": "https://github.com/NENAD-BLAGOVCANIN/chimera-launcher",
+  "publish": {
+    "provider": "github",
+    "releaseType": "release"
+  },
+  "author": "Nenad Blagov",
   "license": "ISC",
   "devDependencies": {
     "electron": "^29.1.0",
