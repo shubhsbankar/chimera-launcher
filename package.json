@@ -1,6 +1,6 @@
 {
   "name": "chimera-launcher",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "This is an app launcher developed with ElectronJS.",
   "main": "main.js",
   "scripts": {
