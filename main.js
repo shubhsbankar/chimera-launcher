@@ -1,7 +1,9 @@
 const { app, BrowserWindow, ipcMain, Tray, Menu } = require('electron');
 const { autoUpdater } = require('electron-updater');
 const path = require('path');
-
+const DiscordRPC = require('discord-rpc');
+const clientId = '1217774050084917328';
+DiscordRPC.register(clientId);
 // require('electron-reload')(__dirname);
 
 let win;
@@ -119,3 +121,43 @@ ipcMain.on('launch-exe-app', () => {
 autoUpdater.on('update-available', () => {
   autoUpdater.downloadUpdate();
 });
+
+
+const rpc = new DiscordRPC.Client({ transport: 'ipc' });
+const startTimestamp = new Date();
+
+async function setActivity() {
+  if (!rpc || !win) {
+    return;
+  }
+
+  rpc.setActivity({
+    details: `You can write some details here!`,
+    state: 'Enjoying my gaming time!',
+    startTimestamp,
+    largeImageKey: 'logo',
+    largeImageText: 'some radnom text',
+    smallImageKey: 'logo',
+    smallImageText: 'some radnom text',
+    instance: false,
+    buttons: [
+      {
+        "label": "Visit Website",
+        "url": "http://chimeraf2w.com/"
+      },
+      {
+        "label": "Test button",
+        "url": "https://multiverzum.com/"
+      }
+    ]
+  });
+}
+
+rpc.on('ready', async () => {
+  setActivity();
+  setInterval(() => {
+    setActivity();
+  }, 15 * 1000);
+});
+
+rpc.login({ clientId }).catch(console.error);
