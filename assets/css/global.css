@@ -72,3 +72,7 @@ a {
 .form-control::-ms-input-placeholder { /* Microsoft Edge */
     color: #a4a6a8 !important;
 }
+
+.w-fit{
+    width: fit-content !important;
+}

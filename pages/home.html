@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../assets/css/global.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body::before {
             content: '';
@@ -37,18 +38,39 @@
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
+        }
+
+        .animated-btn{
             transition: transform 0.3s ease;
         }
 
-        #dofus-run-button:hover{
+        .animated-btn:hover {
             transform: scale(1.1);
         }
 
         #start-button-wrapper {
             position: absolute;
-            bottom: 2rem;
-            left: 50%;
+            bottom: 5rem;
+            left: 12rem;
             transform: translateX(-50%);
+        }
+
+        .left-navigation {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 2rem;
+        }
+
+        .left-navigation .btn{
+            max-width: 110px;
+        }.close-button-wrapper{
+            position: absolute;
+            padding-right: 2rem;
+            padding-top: 1.8rem;
+            cursor: pointer;
+            right: 0;
+            top: 0;
         }
     </style>
 
@@ -58,8 +80,31 @@
 
 <body>
     <div class="position-relative w-100" style="height: 100vh;">
+
+        <div class="left-navigation w-fit">
+            <div class="btn animated-btn p-3 p-2 w-100 mb-3" style="background-color: rgba(24, 24, 27, 0.418);">
+                <i class="fa-solid fa-comments h2 text-white"></i>
+                <span class="text-white">Forums</span>
+            </div>
+            <div class="btn animated-btn p-3 p-2 w-100 mb-3" style="background-color: rgba(24, 24, 27, 0.418);">
+                <i class="fa-solid fa-circle-question text-white h2"></i>
+                <span class="text-white">Support</span>
+            </div>
+            <div class="btn animated-btn p-3 p-2 w-100 mb-3" style="background-color: rgba(24, 24, 27, 0.418);">
+                <i class="fa-solid fa-shopping-cart h2 text-white"></i>
+                <span class="text-white">Boutique</span>
+            </div>
+            <div class="btn animated-btn p-3 bg-transparent rounded-lg p-2 w-100 mb-3">
+                <i class="fa-solid fa-gear text-white h1"></i>
+            </div>
+        </div>
+
         <div id="start-button-wrapper">
-            <button class="btn text-white h4 bold px-5 shadow-lg" id="dofus-run-button"></button>
+            <button class="btn text-white h4 bold px-5 animated-btn shadow-lg" id="dofus-run-button"></button>
+        </div>
+
+        <div id="close" class="close-button-wrapper">
+            <span class="text-white h2"><i class="fa fa-close"></i></span>
         </div>
     </div>
 
@@ -72,8 +117,17 @@
             }
         }
 
+        function close() {
+            if (window.ipcRenderer) {
+                window.ipcRenderer.send('close-main-window');
+            }
+        }
+
         document.getElementById('dofus-run-button').addEventListener('click', function () {
             launchExeApp();
+        });
+        document.getElementById('close').addEventListener('click', function () {
+            close();
         });
     </script>
 

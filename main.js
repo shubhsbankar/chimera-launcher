@@ -106,8 +106,11 @@ app.on('before-quit', () => {
 });
 
 ipcMain.on('launch-exe-app', () => {
+
+  const appRootPath = app.getAppPath();
+  const executablePath = path.join(appRootPath, 'app', 'dofus.exe');
+  
   var child = require('child_process').execFile;
-  var executablePath = "C:\\WINDOWS\\system32\\notepad.exe";
 
   child(executablePath, function (err, data) {
     if (err) {
@@ -117,6 +120,13 @@ ipcMain.on('launch-exe-app', () => {
 
     console.log(data.toString());
   });
+});
+
+ipcMain.on('close-main-window', (event) => {
+  if (!app.isQuitting) {
+    event.preventDefault();
+    win.hide();
+  }
 });
 
 autoUpdater.on('update-available', () => {
