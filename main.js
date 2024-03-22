@@ -4,7 +4,7 @@ const path = require('path');
 const DiscordRPC = require('discord-rpc');
 const clientId = '1217774050084917328';
 DiscordRPC.register(clientId);
-// require('electron-reload')(__dirname);
+require('electron-reload')(__dirname);
 
 let win;
 let splash;
@@ -34,8 +34,9 @@ function createSplashWindow() {
 
 function createMainWindow() {
   win = new BrowserWindow({
-    width: 1200,
-    height: 800,
+    width: 1000,
+    height: 850,
+    frame: false,
     show: false,
     icon: path.join(__dirname, 'assets/img/icon.png'),
     webPreferences: {
