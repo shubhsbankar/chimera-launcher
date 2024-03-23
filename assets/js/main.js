@@ -3,6 +3,8 @@ function saveSettings() {
 
     localStorage.setItem('launchTimes', launchTimes);
 
+    alert("Settings Saved!");
+
     console.log(launchTimes)
     console.log(localStorage.getItem('launchTimes'));
 
