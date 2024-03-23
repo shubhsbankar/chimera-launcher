@@ -1,6 +1,5 @@
 :root {
     --color-dark: rgb(13, 24, 33);
-    --color-text: white;
     --color-text-secondary: #818181;
     --color-dark-lighter: rgb(14, 43, 63);
     --color-dark-gradient: linear-gradient(to right, var(--color-dark), var(--color-dark-lighter));
@@ -10,8 +9,7 @@
 }
 
 body {
-    color: var(--color-text) !important;
-    background-color: var(--color-dark) !important;
+    color: var(--color-dark) !important;
     font-size: 13pt;
     font-family: Poppins !important;
     font-weight: 400;
@@ -75,4 +73,8 @@ a {
 
 .w-fit{
     width: fit-content !important;
+}
+
+.pointer{
+    cursor: pointer !important;
 }

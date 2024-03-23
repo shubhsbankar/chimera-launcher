@@ -12,8 +12,8 @@ let tray;
 
 function createSplashWindow() {
   splash = new BrowserWindow({
-    width: 900,
-    height: 700,
+    width: 800,
+    height: 500,
     frame: false,
     transparent: true,
     alwaysOnTop: true,
@@ -34,9 +34,9 @@ function createSplashWindow() {
 
 function createMainWindow() {
   win = new BrowserWindow({
-    width: 1000,
-    height: 850,
-    frame: false,
+    width: 800,
+    height: 500,
+    frame: true,
     show: false,
     icon: path.join(__dirname, 'assets/img/icon.png'),
     webPreferences: {
