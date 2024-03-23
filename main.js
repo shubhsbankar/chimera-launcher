@@ -36,8 +36,9 @@ function createMainWindow() {
   win = new BrowserWindow({
     width: 800,
     height: 500,
-    frame: true,
+    frame: false,
     show: false,
+    transparent: true,
     icon: path.join(__dirname, 'assets/img/icon.png'),
     webPreferences: {
       nodeIntegration: false,
@@ -109,7 +110,7 @@ ipcMain.on('launch-exe-app', () => {
 
   const appRootPath = app.getAppPath();
   const executablePath = path.join(appRootPath, 'app', 'dofus.exe');
-  
+
   var child = require('child_process').execFile;
 
   child(executablePath, function (err, data) {
