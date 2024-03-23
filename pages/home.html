@@ -40,7 +40,7 @@
             background-size: cover;
         }
 
-        .animated-btn{
+        .animated-btn {
             transition: transform 0.3s ease;
         }
 
@@ -62,9 +62,11 @@
             padding: 2rem;
         }
 
-        .left-navigation .btn{
+        .left-navigation .btn {
             max-width: 150px;
-        }.close-button-wrapper{
+        }
+
+        .close-button-wrapper {
             position: absolute;
             padding-right: 2rem;
             padding-top: 1.8rem;
@@ -82,19 +84,23 @@
     <div class="position-relative w-100" style="height: 100vh;">
 
         <div class="left-navigation w-fit">
-            <div class="btn animated-btn d-flex align-items-center p-3 w-100 mb-3" style="background-color: rgba(24, 24, 27, 0.418);">
+            <div class="btn animated-btn d-flex align-items-center p-3 w-100 mb-3"
+                style="background-color: rgba(24, 24, 27, 0.418);">
                 <i class="fa-solid fa-comments text-white"></i>
                 <span class="text-white ps-2">Forums</span>
             </div>
-            <div class="btn animated-btn d-flex align-items-center p-3 w-100 mb-3" style="background-color: rgba(24, 24, 27, 0.418);">
+            <div class="btn animated-btn d-flex align-items-center p-3 w-100 mb-3"
+                style="background-color: rgba(24, 24, 27, 0.418);">
                 <i class="fa-solid fa-circle-question text-white"></i>
                 <span class="text-white ps-2">Support</span>
             </div>
-            <div class="btn animated-btn d-flex align-items-center p-3 w-100 mb-3" style="background-color: rgba(24, 24, 27, 0.418);">
+            <div class="btn animated-btn d-flex align-items-center p-3 w-100 mb-3"
+                style="background-color: rgba(24, 24, 27, 0.418);">
                 <i class="fa-solid fa-shopping-cart text-white"></i>
                 <span class="text-white ps-2">Boutique</span>
             </div>
-            <div type="button" class="animated-btn p-3 bg-transparent rounded-lg pointer text-center w-100 mb-3" data-bs-toggle="modal" data-bs-target="#settingsModal">
+            <div type="button" class="animated-btn p-3 bg-transparent rounded-lg pointer text-center w-100 mb-3"
+                data-bs-toggle="modal" data-bs-target="#settingsModal">
                 <i class="fa-solid fa-gear text-white"></i>
             </div>
         </div>
@@ -111,45 +117,63 @@
 
     <div class="modal" tabindex="-1" role="dialog" id="settingsModal">
         <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header border-0">
-              <h5 class="modal-title">Settings</h5>
-              <h3 type="button" class="btn close ms-auto" data-dismiss="modal" aria-label="Close">
-                <i class="fa fa-close"></i>
-              </h3>
-            </div>
-            <div class="modal-body">
-                <p>Launch times:</p>
-              <div class="row">
-                <div class="col md-4">
-                    <form action="">
-                        <input type="range" max="8" min="1" value="1" class="form-range w-100" id="launch-times">
-                        <div class="d-flex justify-content-between">
-                            <span class="small">1</span>
-                            <span class="small">2</span>
-                            <span class="small">3</span>
-                            <span class="small">4</span>
-                            <span class="small">5</span>
-                            <span class="small">6</span>
-                            <span class="small">7</span>
-                            <span class="small">8</span>
-                        </div>
-                    </form>
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title">Settings</h5>
+                    <h3 type="button" class="btn close ms-auto" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-close"></i>
+                    </h3>
                 </div>
-              </div>
+                <div class="modal-body">
+                    <p>Launch times:</p>
+                    <div class="row">
+                        <div class="col md-4">
+                            <form action="">
+                                <input type="range" max="8" min="1" value="1" class="form-range w-100"
+                                    id="launch-times">
+                                <div class="d-flex justify-content-between">
+                                    <span class="small">1</span>
+                                    <span class="small">2</span>
+                                    <span class="small">3</span>
+                                    <span class="small">4</span>
+                                    <span class="small">5</span>
+                                    <span class="small">6</span>
+                                    <span class="small">7</span>
+                                    <span class="small">8</span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-primary" onclick="saveSettings()">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="modal-footer border-0">
-              <button type="button" class="btn btn-primary" onclick="saveSettings()">Save</button>
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
+
+    <script>
+        let launchTimes = localStorage.getItem('launchTimes');
+        if (!launchTimes) {
+            launchTimes = 1;
+        }
+        else {
+            launchTimes = parseInt(launchTimes);
+        }
+
+        console.log(launchTimes);
+
+        document.getElementById('launch-times').value = launchTimes;
+
+    </script>
 
     <script>
         function launchExeApp() {
             if (window.ipcRenderer) {
-                window.ipcRenderer.send('launch-exe-app');
+                for (let i = 0; i < launchTimes; i++) {
+                    window.ipcRenderer.send('launch-exe-app');
+                }
             } else {
                 console.error('ipcRenderer is not available');
             }

@@ -1,5 +1,9 @@
-function saveSettings(){
-    var launchTimes = document.getElementById('launch-times').value;
+function saveSettings() {
+    launchTimes = document.getElementById('launch-times').value;
+
     localStorage.setItem('launchTimes', launchTimes);
-    alert(launchTimes);
+
+    console.log(launchTimes)
+    console.log(localStorage.getItem('launchTimes'));
+
 }
