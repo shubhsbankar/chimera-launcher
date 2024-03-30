@@ -12,22 +12,21 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-
         .main-window-container {
-            position: relative;
-            background-image: url('../assets/img/bg.png');
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            background-size: contain !important;
+            width: 100%;
         }
 
         #dofus-run-button {
-            background-image: url(../assets/img/start_button.png);
-            width: 170px;
-            height: 73.4px;
+            background-image: url(../assets/img/play.png);
+            width: 118px;
+            height: 43.4px;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
+            z-index: 999999 !important;
         }
 
         .animated-btn {
@@ -40,8 +39,9 @@
 
         #start-button-wrapper {
             position: absolute;
-            bottom: 1rem;
-            left: 12rem;
+            bottom: .5rem;
+            left: 50%;
+            z-index: 99999 !important;
             transform: translateX(-50%);
         }
 
@@ -58,11 +58,37 @@
 
         .close-button-wrapper {
             position: absolute;
-            padding-right: 2rem;
-            padding-top: 1.8rem;
             cursor: pointer;
-            right: 0;
-            top: 0;
+            right: 24.5%;
+            top: 15%;
+        }
+
+        #discordIcon {
+            width: 30px;
+            bottom: 2.15rem;
+            left: 30%;
+            cursor: pointer;
+        }
+
+        #settingsIcon {
+            width: 24px;
+            bottom: 2.15rem;
+            right: 30%;
+            cursor: pointer;
+        }
+
+        #userGuide {
+            width: 32px;
+            bottom: 6.6rem;
+            left: 18%;
+            cursor: pointer;
+        }
+
+        #shoppingCart {
+            width: 41px;
+            bottom: 6.6rem;
+            right: 17.8%;
+            cursor: pointer;
         }
     </style>
 
@@ -72,37 +98,23 @@
 
 <body>
     <div class="main-window-container">
-        <div class="position-relative w-100" style="height: 100vh;">
 
-            <div class="left-navigation w-fit">
-                <div class="btn animated-btn d-flex align-items-center p-3 w-100 mb-3"
-                    style="background-color: rgba(24, 24, 27, 0.418);">
-                    <i class="fa-solid fa-comments text-white"></i>
-                    <span class="text-white ps-2">Forums</span>
-                </div>
-                <div class="btn animated-btn d-flex align-items-center p-3 w-100 mb-3"
-                    style="background-color: rgba(24, 24, 27, 0.418);">
-                    <i class="fa-solid fa-circle-question text-white"></i>
-                    <span class="text-white ps-2">Support</span>
-                </div>
-                <div class="btn animated-btn d-flex align-items-center p-3 w-100 mb-3"
-                    style="background-color: rgba(24, 24, 27, 0.418);">
-                    <i class="fa-solid fa-shopping-cart text-white"></i>
-                    <span class="text-white ps-2">Boutique</span>
-                </div>
-                <div type="button" class="animated-btn p-3 bg-transparent rounded-lg pointer text-center w-100 mb-3"
-                    data-bs-toggle="modal" data-bs-target="#settingsModal">
-                    <i class="fa-solid fa-gear text-white"></i>
-                </div>
-            </div>
+        <img src="../assets/img/bg.png" class="h-100 position-absolute" style="left: 50%; transform: translateX(-50%);"
+            alt="">
 
-            <div id="start-button-wrapper">
-                <button class="btn text-white h4 bold px-5 animated-btn shadow-lg" id="dofus-run-button"></button>
-            </div>
+        <img src="../assets/img/guide.png" class="position-absolute" id="userGuide" alt="">
+        <img src="../assets/img/shop.png" class="position-absolute" id="shoppingCart" alt="">
 
-            <div id="close" class="close-button-wrapper">
-                <span class="text-white"><i class="fa fa-close"></i></span>
-            </div>
+        <img src="../assets/img/discord.png" class="position-absolute" id="discordIcon" alt="">
+        <img src="../assets/img/settings.png" class="position-absolute" id="settingsIcon" alt="" data-bs-toggle="modal"
+            data-bs-target="#settingsModal">
+
+        <div id="start-button-wrapper">
+            <button class="btn text-white h4 bold animated-btn shadow-lg" id="dofus-run-button"></button>
+        </div>
+
+        <div id="close" class="close-button-wrapper">
+            <span class="text-dark"><i class="fa fa-close h1"></i></span>
         </div>
 
 

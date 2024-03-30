@@ -9,9 +9,7 @@
 }
 
 .main-window-container{
-    background-color: white;
-    height: 500px !important;
-    width: 800px;
+    width: 100%;
     border-radius: 2rem !important;
 }
 
