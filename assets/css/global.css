@@ -84,3 +84,7 @@ a {
 .pointer{
     cursor: pointer !important;
 }
+
+.modal-backdrop {
+    background-color: transparent !important;
+ }
