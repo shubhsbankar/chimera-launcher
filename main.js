@@ -87,8 +87,30 @@ app.on('ready', () => {
   createSplashWindow();
   createTray();
 
+  // Check for updates on app ready
   autoUpdater.checkForUpdatesAndNotify();
+
+  autoUpdater.on('update-available', () => {
+    console.log('Update available, downloading...');
+    // Optionally you can notify the user here
+    NotifyUserAboutUpdate();
+    autoUpdater.downloadUpdate();
+  });
+
+  autoUpdater.on('update-downloaded', () => {
+    console.log('Update downloaded, installing...');
+    // Optionally you can notify the user here
+    NotifyUserAboutInstallation();
+    autoUpdater.quitAndInstall();
+  });
+
+  autoUpdater.on('error', (err) => {
+    console.error('Auto updater error:', err.message);
+    // Optionally you can notify the user here
+    // NotifyUserAboutError();
+  });
 });
+
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
