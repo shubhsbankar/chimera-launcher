@@ -88,3 +88,7 @@ a {
 .modal-backdrop {
     background-color: transparent !important;
  }
+ 
+ .hide {
+    display: none
+ }

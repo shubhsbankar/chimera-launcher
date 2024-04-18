@@ -5,10 +5,16 @@ const DiscordRPC = require('discord-rpc');
 const clientId = '1217774050084917328';
 DiscordRPC.register(clientId);
 require('electron-reload')(__dirname);
+const Updater = require('./Updater');
 
 let win;
 let splash;
 let tray;
+let updater;
+
+const updateApp = async () => {
+  await updater.checkAndUpdate();
+}
 
 function createSplashWindow() {
   splash = new BrowserWindow({
@@ -20,7 +26,10 @@ function createSplashWindow() {
     resizable: false,
     icon: path.join(__dirname, 'assets/img/icon.png'),
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: false,
+      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js'),
+      webSecurity: true
     }
   });
 
@@ -28,7 +37,14 @@ function createSplashWindow() {
 
   splash.once('ready-to-show', () => {
     splash.show();
-    setTimeout(createMainWindow, 2000);
+    updater = new Updater({
+      versionUrl: 'http://5.254.118.206/upl/updater.version',
+      patchUrl: 'http://5.254.118.206/upl/patch.zip',
+      localVersionFile: './updater.version',
+      splash,
+      createMainWindow
+    });
+    updateApp();    
   });
 }
 
@@ -86,7 +102,6 @@ function createTray() {
 app.on('ready', () => {
   createSplashWindow();
   createTray();
-
   // Check for updates on app ready
   autoUpdater.checkForUpdatesAndNotify();
 
@@ -150,6 +165,11 @@ ipcMain.on('close-main-window', (event) => {
     event.preventDefault();
     win.hide();
   }
+});
+
+ipcMain.on('update-finished', () => {
+  console.log("update-finished opening main window")
+  createMainWindow();
 });
 
 autoUpdater.on('update-available', () => {
